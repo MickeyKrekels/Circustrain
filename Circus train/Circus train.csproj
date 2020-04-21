@@ -55,6 +55,8 @@
     <Compile Include="Animals\Mammal.cs" />
     <Compile Include="Animals\Reptile.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Factory\AnimalFactory.cs" />
+    <Compile Include="Factory\WagonFactory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

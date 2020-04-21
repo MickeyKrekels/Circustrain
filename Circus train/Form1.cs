@@ -1,6 +1,7 @@
 ﻿using Circus_train.Animals;
 using Circus_train.Animals.Base;
 using Circus_train.Enums;
+using Circus_train.Factory;
 using Circus_train.Wagons;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Circus_train
 
         private void BuildAnimalTree()
         {
-            totalAnimals = GenerateRandomAnimals();
+            totalAnimals = AnimalFactory.GenerateRandomAnimals(3);
 
             treeView1.Nodes.Clear();
 
@@ -53,7 +54,7 @@ namespace Circus_train
                 return;
             }
 
-            totalWagons = GenerateWagons(totalAnimals);
+            totalWagons = WagonFactory.GenerateFilledWagons(totalAnimals);
 
             treeView2.Nodes.Clear();
 
@@ -75,79 +76,6 @@ namespace Circus_train
             treeView2.EndUpdate();
         }
 
-
-        public List<Animal> GenerateRandomAnimals()
-        {
-            var result = new List<Animal>();
-
-            Array values = Enum.GetValues(typeof(AnimalDiet));
-            Random random = new Random();
-
-            int maxAnimalAmount = 100;
-
-            //Amphibians
-            result.AddRange(GetAnimals(values,AnimalNames.Amphibians, maxAnimalAmount,180,0.01f));
-            //Reptile
-            result.AddRange(GetAnimals(values, AnimalNames.Reptiles, maxAnimalAmount,70));
-            //Mammal
-            result.AddRange(GetAnimals(values, AnimalNames.Mammals, maxAnimalAmount, 300));
-            //Fish
-            result.AddRange(GetAnimals(values, AnimalNames.Fishes, maxAnimalAmount, 300));
-            //insect
-            result.AddRange(GetAnimals(values, AnimalNames.Insects, maxAnimalAmount,100, 0.001f));
-            //bird
-            result.AddRange(GetAnimals(values, AnimalNames.Birds, maxAnimalAmount, 100));
-
-            return result;
-        }
-
-        private  List<Animal> GetAnimals(Array values,string[] type, int maxAnimalAmount,int maxWeight,float weightScale = 1)
-        {
-            var result = new List<Animal>();
-            Random random = new Random();
-            for (int a = 0; a < random.Next(0, maxAnimalAmount); a++)
-            {
-                int index = random.Next(0, type.Length);
-                string animalname = type[index];
-                AnimalDiet randomAnimalDiet = (AnimalDiet)values.GetValue(random.Next(values.Length));
-
-                Amphibian animal = new Amphibian(animalname, random.Next(1, maxWeight) * weightScale, randomAnimalDiet);
-                result.Add(animal);
-            }
-            return result;
-        }
-
-        private List<CattleWagon> GenerateWagons(List<Animal> animals)
-        {
-            var result = new List<CattleWagon>();
-
-            int count = 0;
-            CattleWagon currentWagon = new CattleWagon($"wagon_{count}", 0, 1000);
-            result.Add(currentWagon);
-            //orders animal list by weight
-            var animalsDesc = animals.OrderBy(s => s.weight).ToList();
-
-            while (animalsDesc.Count != 0)
-            {
-                for (int i = 0; i < animalsDesc.Count; i++)
-                {
-                    Animal animal = animalsDesc[i];
-                    if (!currentWagon.AddAnimal(animal))
-                        continue;
-
-                    animalsDesc.Remove(animal);
-                }
-                //if there are still animals add them to a new wagon 
-                if (animalsDesc.Count != 0)
-                {
-                    count++;
-                    currentWagon = new CattleWagon($"wagon_{count}", 0, 1000);
-                    result.Add(currentWagon);
-                }
-            }
-
-            return result;
-        }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
