@@ -34,6 +34,9 @@
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.GenerateTrainBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.AnimalCount = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.AnimalCount)).BeginInit();
             this.SuspendLayout();
             // 
             // treeView1
@@ -42,7 +45,6 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(287, 406);
             this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // Generatebtn
             // 
@@ -52,7 +54,7 @@
             this.Generatebtn.TabIndex = 1;
             this.Generatebtn.Text = "Generate Animals";
             this.Generatebtn.UseVisualStyleBackColor = true;
-            this.Generatebtn.Click += new System.EventHandler(this.GenerateBtn_Click);
+            this.Generatebtn.Click += new System.EventHandler(this.GenerateAnimalsBtn_Click);
             // 
             // label1
             // 
@@ -89,11 +91,39 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Train wagons";
             // 
+            // AnimalCount
+            // 
+            this.AnimalCount.Location = new System.Drawing.Point(407, 146);
+            this.AnimalCount.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.AnimalCount.Name = "AnimalCount";
+            this.AnimalCount.Size = new System.Drawing.Size(67, 20);
+            this.AnimalCount.TabIndex = 6;
+            this.AnimalCount.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(326, 148);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Animal Amount";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.AnimalCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.GenerateTrainBtn);
             this.Controls.Add(this.treeView2);
@@ -103,6 +133,7 @@
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "Animal Circus";
+            ((System.ComponentModel.ISupportInitialize)(this.AnimalCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,6 +147,8 @@
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Button GenerateTrainBtn;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown AnimalCount;
+        private System.Windows.Forms.Label label3;
     }
 }
 

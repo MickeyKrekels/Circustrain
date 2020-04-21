@@ -8,19 +8,19 @@ namespace Circus_train.Wagons
     public class CattleWagon : Wagon
     {
         public List<Animal> animals;
-        public int weightScore;
+        public int maxWeightScore;
 
-        public CattleWagon(string name, float currentWeight, float maxCarrierWeight, int weightScore = 10) : base(name, currentWeight, maxCarrierWeight)
+        public CattleWagon(string name, float currentWeight, float maxCarrierWeight, int maxWeightScore = 10) : base(name, currentWeight, maxCarrierWeight)
         {
             animals = new List<Animal>();
-            this.weightScore = weightScore;
+            this.maxWeightScore = maxWeightScore;
         }
 
         public bool AddAnimal(Animal animal)
         {
             //check if animal can be added 
             if ((currentWeight + animal.weight) > maxCarrierWeight ||
-               (CalculateTotalWeightScores() + animal.WeightScore()) > 10)
+               (CalculateTotalWeightScores() + animal.WeightScore()) > maxWeightScore)
                 return false;
 
             if (animal.animalDiet == Enums.AnimalDiet.Carnivores
@@ -69,8 +69,9 @@ namespace Circus_train.Wagons
 
         private bool CheckRoomForNonCarnivores(Animal animal)
         {
-            var Carnivores = animals.Where(x => x.animalDiet == Enums.AnimalDiet.Herbivores).ToList();
+            var Carnivores = animals.Where(x => x.animalDiet == Enums.AnimalDiet.Carnivores).ToList();
             bool isCarnivoreBigger = animals.Any(x => x.weight >= animal.weight && x.animalDiet == Enums.AnimalDiet.Carnivores);
+
             if (Carnivores == null)
                 return true;
 

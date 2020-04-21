@@ -20,19 +20,23 @@ namespace Circus_train.Factory
 
             //orders animal list by weight
             var animalsDesc = animals.OrderBy(s => s.weight).ToList();
-
             while (animalsDesc.Count != 0)
             {
+
                 for (int i = 0; i < animalsDesc.Count; i++)
                 {
                     Animal animal = animalsDesc[i];
-                    if (!currentWagon.AddAnimal(animal))
-                        continue;
 
-                    animalsDesc.Remove(animal);
+                    if (currentWagon.AddAnimal(animal))
+                    {
+                        animalsDesc.Remove(animal);
+                        //reset the index 
+                        i = -1;
+                    }
                 }
+
                 //if there are still animals add them to a new wagon 
-                if (animalsDesc.Count != 0)
+                if (animalsDesc.Count > 0)
                 {
                     count++;
                     currentWagon = new CattleWagon($"wagon_{count}", 0, 1000);

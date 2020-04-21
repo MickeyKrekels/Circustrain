@@ -20,10 +20,11 @@ namespace Circus_train
             InitializeComponent();
         }
 
-
         private void BuildAnimalTree()
         {
-            totalAnimals = AnimalFactory.GenerateRandomAnimals(3);
+
+            int AnimalAmount = (int)AnimalCount.Value;
+            totalAnimals = AnimalFactory.GenerateRandomAnimals(AnimalAmount);
 
             treeView1.Nodes.Clear();
 
@@ -41,12 +42,7 @@ namespace Circus_train
             treeView1.EndUpdate();
         }
 
-        private void GenerateBtn_Click(object sender, EventArgs e)
-        {
-            BuildAnimalTree();
-        }
-
-        private void GenerateTrainBtn_Click(object sender, EventArgs e)
+        private void BuildWagonTree()
         {
             if (totalAnimals == null || totalAnimals.Count == 0)
             {
@@ -76,10 +72,14 @@ namespace Circus_train
             treeView2.EndUpdate();
         }
 
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void GenerateAnimalsBtn_Click(object sender, EventArgs e)
         {
+            BuildAnimalTree();
+        }
 
+        private void GenerateTrainBtn_Click(object sender, EventArgs e)
+        {
+            BuildWagonTree();
         }
     }
 }

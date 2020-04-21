@@ -14,39 +14,55 @@ namespace Circus_train.Factory
 
             Random random = new Random();
 
-            //Amphibians
-            var Amphibians = GenerateAnimals(typeof(Amphibian).Name, AnimalNames.Amphibians, animalAmount, 180, 0.01f);
-            result.AddRange(Amphibians);
+            for (int i = 0; i < animalAmount; i++)
+            {
+                int randomIndex = random.Next(0, 5);
 
-            //Reptile
-            var Reptiles = GenerateAnimals(typeof(Reptile).Name, AnimalNames.Reptiles, animalAmount, 70);
-            result.AddRange(Reptiles);
-
-            //Mammal
-            var Mammals = GenerateAnimals(typeof(Mammal).Name, AnimalNames.Mammals, animalAmount, 300);
-            result.AddRange(Mammals);
-
-            //Fish
-            var Fishes = GenerateAnimals(typeof(Fish).Name, AnimalNames.Fishes, animalAmount, 300);
-            result.AddRange(Fishes);
-
-            //insect
-            var Insects = GenerateAnimals(typeof(Insect).Name, AnimalNames.Insects, animalAmount, 100, 0.001f);
-            result.AddRange(Insects);
-
-            //bird
-            var Birds = GenerateAnimals(typeof(Bird).Name, AnimalNames.Birds, animalAmount, 100);
-            result.AddRange(Birds);
-
+                if (randomIndex == 0)
+                {
+                    //Amphibians
+                    var Amphibian = GenerateAnimal(typeof(Amphibian).Name, AnimalNames.Amphibians, 180,random, 0.01f);
+                    result.Add(Amphibian);
+                }
+                if (randomIndex == 1)
+                {
+                    //Reptile
+                    var Reptile = GenerateAnimal(typeof(Reptile).Name, AnimalNames.Reptiles,70, random);
+                    result.Add(Reptile);
+                }
+                if (randomIndex == 2)
+                {
+                    //Mammal
+                    var Mammal = GenerateAnimal(typeof(Mammal).Name, AnimalNames.Mammals, 300, random);
+                    result.Add(Mammal);
+                }
+                if (randomIndex == 3)
+                {
+                    //Fish
+                    var Fishe = GenerateAnimal(typeof(Fish).Name, AnimalNames.Fishes, 300,random);
+                    result.Add(Fishe);
+                }
+                if (randomIndex == 4)
+                {
+                    //insect
+                    var Insect = GenerateAnimal(typeof(Insect).Name, AnimalNames.Insects, 100, random, 0.001f);
+                    result.Add(Insect);
+                }
+                if (randomIndex == 5)
+                {
+                    //bird
+                    var Bird = GenerateAnimal(typeof(Bird).Name, AnimalNames.Birds, 100, random);
+                    result.Add(Bird);
+                }
+            }
 
             return result;
         }
 
-        public static Animal GenerateAnimal(string AnimalType, string[] animalNames, int maxWeight, float weightScale = 1)
+        public static Animal GenerateAnimal(string AnimalType, string[] animalNames, int maxWeight,Random random, float weightScale = 1)
         {
 
             Animal animal = null;
-            Random random = new Random();
             Array values = Enum.GetValues(typeof(AnimalDiet));
             AnimalDiet randomAnimalDiet = (AnimalDiet)values.GetValue(random.Next(values.Length));
 
@@ -83,13 +99,13 @@ namespace Circus_train.Factory
 
         public static List<Animal> GenerateAnimals(string AnimalType, string[] animalNames, int animalAmount, int maxWeight, float weightScale = 1)
         {
-            Array values = Enum.GetValues(typeof(AnimalDiet));
+            Random random = new Random();
             var result = new List<Animal>();
 
             for (int a = 0; a < animalAmount; a++)
             {
 
-                var animal = GenerateAnimal(AnimalType, animalNames, maxWeight, weightScale);
+                var animal = GenerateAnimal(AnimalType, animalNames, maxWeight, random, weightScale);
                 if (animal == null)
                     continue;
 
@@ -98,5 +114,6 @@ namespace Circus_train.Factory
 
             return result;
         }
+
     }
 }
