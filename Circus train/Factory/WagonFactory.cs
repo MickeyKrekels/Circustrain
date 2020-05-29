@@ -19,7 +19,7 @@ namespace Circus_train.Factory
             result.Add(currentWagon);
 
             //orders animal list by weight
-            var animalsDesc = animals.OrderBy(s => s.weight).ToList();
+            var animalsDesc = animals.OrderBy(s => s.Weight).ToList();
             while (animalsDesc.Count != 0)
             {
 

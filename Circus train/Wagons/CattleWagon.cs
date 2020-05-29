@@ -7,23 +7,23 @@ namespace Circus_train.Wagons
 {
     public class CattleWagon : Wagon
     {
-        public List<Animal> animals;
-        public int maxWeightScore;
+        public List<Animal> Animals { get; private set; }
+        public int MaxWeightScore { get; set; }
 
         public CattleWagon(string name, float currentWeight, float maxCarrierWeight, int maxWeightScore = 10) : base(name, currentWeight, maxCarrierWeight)
         {
-            animals = new List<Animal>();
-            this.maxWeightScore = maxWeightScore;
+            Animals = new List<Animal>();
+            this.MaxWeightScore = maxWeightScore;
         }
 
         public bool AddAnimal(Animal animal)
         {
             //check if animal can be added 
-            if ((currentWeight + animal.weight) > maxCarrierWeight ||
-               (CalculateTotalWeightScores() + animal.WeightScore()) > maxWeightScore)
+            if ((CurrentWeight + animal.Weight) > MaxCarrierWeight ||
+               (CalculateTotalWeightScores() + animal.WeightScore()) > MaxWeightScore)
                 return false;
 
-            if (animal.animalDiet == Enums.AnimalDiet.Carnivores
+            if (animal.AnimalDiet == Enums.AnimalDiet.Carnivores
                && !CheckRoomForCarnivore(animal))
                 return false;
 
@@ -31,8 +31,8 @@ namespace Circus_train.Wagons
                 return false;
 
             //increase total weight
-            currentWeight += animal.weight;
-            animals.Add(animal);
+            CurrentWeight += animal.Weight;
+            Animals.Add(animal);
             return true;
         }
 
@@ -40,7 +40,7 @@ namespace Circus_train.Wagons
         {
             int result = 0;
 
-            foreach (var animal in animals)
+            foreach (var animal in Animals)
             {
                 result += animal.WeightScore();
             }
@@ -50,8 +50,8 @@ namespace Circus_train.Wagons
 
         private bool CheckRoomForCarnivore(Animal animal)
         {           
-            var Carnivores = animals.Where(x => x.animalDiet == Enums.AnimalDiet.Carnivores).ToList();
-            bool IsAnyHerbivoreSmaller = animals.Any(x => x.weight <= animal.weight);
+            var Carnivores = Animals.Where(x => x.AnimalDiet == Enums.AnimalDiet.Carnivores).ToList();
+            bool IsAnyHerbivoreSmaller = Animals.Any(x => x.Weight <= animal.Weight);
 
             //if there is no Carnivore in the wagon there is room
             if (Carnivores == null)
@@ -69,8 +69,8 @@ namespace Circus_train.Wagons
 
         private bool CheckRoomForNonCarnivores(Animal animal)
         {
-            var Carnivores = animals.Where(x => x.animalDiet == Enums.AnimalDiet.Carnivores).ToList();
-            bool isCarnivoreBigger = animals.Any(x => x.weight >= animal.weight && x.animalDiet == Enums.AnimalDiet.Carnivores);
+            var Carnivores = Animals.Where(x => x.AnimalDiet == Enums.AnimalDiet.Carnivores).ToList();
+            bool isCarnivoreBigger = Animals.Any(x => x.Weight >= animal.Weight && x.AnimalDiet == Enums.AnimalDiet.Carnivores);
 
             if (Carnivores == null)
                 return true;

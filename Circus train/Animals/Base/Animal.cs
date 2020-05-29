@@ -9,30 +9,30 @@ namespace Circus_train.Animals
 {
     public class Animal
     {
-        public string name;
-        public float weight;
-        public AnimalDiet animalDiet;
+        public string Name { get; set; }
+        public float Weight { get; set; }
+        public AnimalDiet AnimalDiet { get; set; }
 
         public Animal(string name, float weight, AnimalDiet animalDiet)
         {
-            this.name = name;
-            this.weight = weight;
-            this.animalDiet = animalDiet;
+            this.Name = name;
+            this.Weight = weight;
+            this.AnimalDiet = animalDiet;
         }
 
         public int WeightScore()
         {
             int result = 0;
 
-            if (weight <= 10)
+            if (Weight <= 10)
             {
                 result = 1;
             }
-            if (weight > 10 && weight < 150)
+            if (Weight > 10 && Weight < 150)
             {
                 result = 3;
             }
-            if (weight >= 150)
+            if (Weight >= 150)
             {
                 result = 5;
             }

@@ -32,10 +32,10 @@ namespace Circus_train
             for (int i = 0; i < totalAnimals.Count; i++)
             {
 
-                treeView1.Nodes.Add(totalAnimals[i].name);
-                treeView1.Nodes[i].Nodes.Add("Name: " + totalAnimals[i].animalDiet.ToString());
+                treeView1.Nodes.Add(totalAnimals[i].Name);
+                treeView1.Nodes[i].Nodes.Add("Name: " + totalAnimals[i].AnimalDiet.ToString());
                 treeView1.Nodes[i].Nodes.Add("Type: " + totalAnimals[i].GetType().Name);
-                treeView1.Nodes[i].Nodes.Add("Weight: " + totalAnimals[i].weight.ToString() + " KG");
+                treeView1.Nodes[i].Nodes.Add("Weight: " + totalAnimals[i].Weight.ToString() + " KG");
                 treeView1.Nodes[i].Nodes.Add("WeightScore: " + totalAnimals[i].WeightScore().ToString() + " Points");
 
             }
@@ -58,14 +58,14 @@ namespace Circus_train
 
             for (int i = 0; i < totalWagons.Count; i++)
             {
-                treeView2.Nodes.Add(totalWagons[i].name);
-                for (int j = 0; j < totalWagons[i].animals.Count; j++)
+                treeView2.Nodes.Add(totalWagons[i].Name);
+                for (int j = 0; j < totalWagons[i].Animals.Count; j++)
                 {
-                    Animal animal = totalWagons[i].animals[j];
-                    treeView2.Nodes[i].Nodes.Add(animal.name);
+                    Animal animal = totalWagons[i].Animals[j];
+                    treeView2.Nodes[i].Nodes.Add(animal.Name);
 
-                    treeView2.Nodes[i].Nodes[j].Nodes.Add("Weight: " + animal.weight.ToString() + " KG");
-                    treeView2.Nodes[i].Nodes[j].Nodes.Add("Type: " + animal.animalDiet.ToString());
+                    treeView2.Nodes[i].Nodes[j].Nodes.Add("Weight: " + animal.Weight.ToString() + " KG");
+                    treeView2.Nodes[i].Nodes[j].Nodes.Add("Type: " + animal.AnimalDiet.ToString());
                     treeView2.Nodes[i].Nodes[j].Nodes.Add("WeightScore: " + animal.WeightScore().ToString() + " Points");
                 }
             }

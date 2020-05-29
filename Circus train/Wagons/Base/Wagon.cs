@@ -9,15 +9,15 @@ namespace Circus_train.Base.Wagon
 {
     public class Wagon
     {
-        public readonly string name;
-        protected float currentWeight;
-        protected float maxCarrierWeight;
+        public string Name { get; set; }
+        protected float CurrentWeight { get; set; }
+        protected float MaxCarrierWeight { get; set; }
 
         public Wagon(string name, float currentWeight, float maxCarrierWeight)
         {
-            this.name = name;
-            this.currentWeight = currentWeight;
-            this.maxCarrierWeight = maxCarrierWeight;
+            this.Name = name;
+            this.CurrentWeight = currentWeight;
+            this.MaxCarrierWeight = maxCarrierWeight;
         }
     }
 }
