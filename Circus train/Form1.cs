@@ -59,9 +59,9 @@ namespace Circus_train
             for (int i = 0; i < totalWagons.Count; i++)
             {
                 treeView2.Nodes.Add(totalWagons[i].Name);
-                for (int j = 0; j < totalWagons[i].Animals.Count; j++)
+                for (int j = 0; j < totalWagons[i].AllAnimals.Count; j++)
                 {
-                    Animal animal = totalWagons[i].Animals[j];
+                    Animal animal = totalWagons[i].AllAnimals[j];
                     treeView2.Nodes[i].Nodes.Add(animal.Name);
 
                     treeView2.Nodes[i].Nodes[j].Nodes.Add("Weight: " + animal.Weight.ToString() + " KG");

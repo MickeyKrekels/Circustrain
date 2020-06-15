@@ -9,9 +9,9 @@ namespace Circus_train.Animals
 {
     public class Animal
     {
-        public string Name { get; set; }
-        public float Weight { get; set; }
-        public AnimalDiet AnimalDiet { get; set; }
+        public string Name { get; private set; }
+        public float Weight { get; private set; }
+        public AnimalDiet AnimalDiet { get; private set; }
 
         public Animal(string name, float weight, AnimalDiet animalDiet)
         {

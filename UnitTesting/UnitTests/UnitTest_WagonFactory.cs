@@ -16,20 +16,20 @@ namespace UnitTesting.UnitTests
         {
             //Assign
             List<Animal> animals = new List<Animal>();
-            Bird bird_1 = new Bird("test", 2f, AnimalDiet.Herbivores);
-            Bird bird_2 = new Bird("test", 3f, AnimalDiet.Herbivores);
-            Amphibian Amphibian_1 = new Amphibian("test", 2.5f, AnimalDiet.Carnivores);
+            Bird bird_1 = new Bird("bird_1", 2f, AnimalDiet.Herbivores);
+            Bird bird_2 = new Bird("bird_2", 3f, AnimalDiet.Herbivores);
+            Amphibian Amphibian_1 = new Amphibian("Amphibian_1", 2.5f, AnimalDiet.Carnivores);
 
             //Act
 
             animals.Add(bird_1);
-            animals.Add(bird_1);
+            animals.Add(bird_2);
             animals.Add(Amphibian_1);
 
             var wagons = WagonFactory.GenerateFilledWagons(animals);
             //Assert
             Assert.IsTrue(wagons.Count == 2);
-            Assert.IsTrue(wagons[1].Animals[0].AnimalDiet == AnimalDiet.Carnivores);
+            Assert.IsTrue(wagons[1].AllAnimals[0].AnimalDiet == AnimalDiet.Carnivores);
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace UnitTesting.UnitTests
             var wagons = WagonFactory.GenerateFilledWagons(animals);
             //Assert
             Assert.IsTrue(wagons.Count == 2);
-            Assert.IsTrue(wagons[1].Animals[0].AnimalDiet == AnimalDiet.Carnivores);
+            Assert.IsTrue(wagons[1].AllAnimals[0].AnimalDiet == AnimalDiet.Carnivores);
         }
 
         [TestMethod]

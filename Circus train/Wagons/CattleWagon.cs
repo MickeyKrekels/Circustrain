@@ -1,13 +1,19 @@
 ﻿using Circus_train.Animals;
 using Circus_train.Base.Wagon;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Circus_train.Wagons
 {
     public class CattleWagon : Wagon
     {
-        public List<Animal> Animals { get; private set; }
+        private List<Animal> Animals;
+        public ReadOnlyCollection<Animal> AllAnimals
+        {
+            get { return new ReadOnlyCollection<Animal>(Animals); }
+        }
+
         public int MaxWeightScore { get; set; }
 
         public CattleWagon(string name, float currentWeight, float maxCarrierWeight, int maxWeightScore = 10) : base(name, currentWeight, maxCarrierWeight)
@@ -15,7 +21,7 @@ namespace Circus_train.Wagons
             Animals = new List<Animal>();
             this.MaxWeightScore = maxWeightScore;
         }
-
+ 
         public bool AddAnimal(Animal animal)
         {
             //check if animal can be added 

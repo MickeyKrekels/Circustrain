@@ -55,7 +55,7 @@ namespace UnitTesting.UnitTests
 
             //Assert
             Assert.IsTrue(result.Count == 1);
-            Assert.IsTrue(result[0].Animals.Count == 10);
+            Assert.IsTrue(result[0].AllAnimals.Count == 10);
         }
 
         [TestMethod]
