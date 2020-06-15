@@ -1,16 +1,231 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Circus_train.Animals;
 using Circus_train.Enums;
 using Circus_train.Factory;
-using Circus_train.Wagons;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+using Circus_train.Animals.Base;
 
 namespace UnitTesting.UnitTests
 {
     [TestClass]
     public class UnitTest_WagonFactory
     {
+        [TestMethod]
+        public void WagonFactory_RandomAmphibianAnimals()
+        {
+            int animalAmount = 40;
+
+            var animals = AnimalFactory.GenerateAnimals(typeof(Amphibian).Name, AnimalNames.Amphibians, animalAmount, 50);
+
+            var wagons = WagonFactory.GenerateFilledWagons(animals);
+
+            //check if all animals are added 
+            Assert.IsTrue(wagons.Sum(x => x.AllAnimals.Count) == animalAmount);
+
+            foreach (var wagon in wagons)
+            {
+                var carnivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Carnivores).ToList();
+                var herbivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Herbivores).ToList();
+
+                if (carnivore != null && carnivore.Count > 0)
+                {
+
+                    Assert.IsTrue(carnivore.Count == 1);
+
+                    for (int i = 0; i < carnivore.Count; i++)
+                    {
+                        var herbivoresIsSmaller = herbivore.Any(x => x.Weight < carnivore[i].Weight);
+
+                        // if there is a carnivore in the wagon there can't be a smaller herbivore
+                        Assert.IsTrue(herbivoresIsSmaller == false);
+                    }
+
+                }
+
+
+            }
+        }
+        [TestMethod]
+        public void WagonFactory_RandomBirdAnimals()
+        {
+            int animalAmount = 40;
+
+            var animals = AnimalFactory.GenerateAnimals(typeof(Bird).Name, AnimalNames.Amphibians, animalAmount, 50);
+
+            var wagons = WagonFactory.GenerateFilledWagons(animals);
+
+            //check if all animals are added 
+            Assert.IsTrue(wagons.Sum(x => x.AllAnimals.Count) == animalAmount);
+
+            foreach (var wagon in wagons)
+            {
+                var carnivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Carnivores).ToList();
+                var herbivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Herbivores).ToList();
+
+                if (carnivore != null && carnivore.Count > 0)
+                {
+
+                    Assert.IsTrue(carnivore.Count == 1);
+
+                    for (int i = 0; i < carnivore.Count; i++)
+                    {
+                        var herbivoresIsSmaller = herbivore.Any(x => x.Weight < carnivore[i].Weight);
+
+                        // if there is a carnivore in the wagon there can't be a smaller herbivore
+                        Assert.IsTrue(herbivoresIsSmaller == false);
+                    }
+
+                }
+
+
+            }
+        }
+
+        [TestMethod]
+        public void WagonFactory_RandomFishAnimals()
+        {
+            int animalAmount = 40;
+
+            var animals = AnimalFactory.GenerateAnimals(typeof(Fish).Name, AnimalNames.Amphibians, animalAmount, 50);
+
+            var wagons = WagonFactory.GenerateFilledWagons(animals);
+
+            //check if all animals are added 
+            Assert.IsTrue(wagons.Sum(x => x.AllAnimals.Count) == animalAmount);
+
+            foreach (var wagon in wagons)
+            {
+                var carnivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Carnivores).ToList();
+                var herbivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Herbivores).ToList();
+
+                if (carnivore != null && carnivore.Count > 0)
+                {
+
+                    Assert.IsTrue(carnivore.Count == 1);
+
+                    for (int i = 0; i < carnivore.Count; i++)
+                    {
+                        var herbivoresIsSmaller = herbivore.Any(x => x.Weight < carnivore[i].Weight);
+
+                        // if there is a carnivore in the wagon there can't be a smaller herbivore
+                        Assert.IsTrue(herbivoresIsSmaller == false);
+                    }
+
+                }
+
+
+            }
+        }
+
+        [TestMethod]
+        public void WagonFactory_RandomInsectAnimals()
+        {
+            int animalAmount = 40;
+
+            var animals = AnimalFactory.GenerateAnimals(typeof(Insect).Name, AnimalNames.Amphibians, animalAmount, 50);
+
+            var wagons = WagonFactory.GenerateFilledWagons(animals);
+
+            //check if all animals are added 
+            Assert.IsTrue(wagons.Sum(x => x.AllAnimals.Count) == animalAmount);
+
+            foreach (var wagon in wagons)
+            {
+                var carnivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Carnivores).ToList();
+                var herbivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Herbivores).ToList();
+
+                if (carnivore != null && carnivore.Count > 0)
+                {
+
+                    Assert.IsTrue(carnivore.Count == 1);
+
+                    for (int i = 0; i < carnivore.Count; i++)
+                    {
+                        var herbivoresIsSmaller = herbivore.Any(x => x.Weight < carnivore[i].Weight);
+
+                        // if there is a carnivore in the wagon there can't be a smaller herbivore
+                        Assert.IsTrue(herbivoresIsSmaller == false);
+                    }
+
+                }
+
+
+            }
+        }
+
+        [TestMethod]
+        public void WagonFactory_RandomMammalAnimals()
+        {
+            int animalAmount = 40;
+
+            var animals = AnimalFactory.GenerateAnimals(typeof(Mammal).Name, AnimalNames.Amphibians, animalAmount, 50);
+
+            var wagons = WagonFactory.GenerateFilledWagons(animals);
+
+            //check if all animals are added 
+            Assert.IsTrue(wagons.Sum(x => x.AllAnimals.Count) == animalAmount);
+
+            foreach (var wagon in wagons)
+            {
+                var carnivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Carnivores).ToList();
+                var herbivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Herbivores).ToList();
+
+                if (carnivore != null && carnivore.Count > 0)
+                {
+
+                    Assert.IsTrue(carnivore.Count == 1);
+
+                    for (int i = 0; i < carnivore.Count; i++)
+                    {
+                        var herbivoresIsSmaller = herbivore.Any(x => x.Weight < carnivore[i].Weight);
+
+                        // if there is a carnivore in the wagon there can't be a smaller herbivore
+                        Assert.IsTrue(herbivoresIsSmaller == false);
+                    }
+
+                }
+
+
+            }
+        }
+
+        [TestMethod]
+        public void WagonFactory_RandomReptileAnimals()
+        {
+            int animalAmount = 40;
+
+            var animals = AnimalFactory.GenerateAnimals(typeof(Reptile).Name, AnimalNames.Amphibians, animalAmount, 50);
+
+            var wagons = WagonFactory.GenerateFilledWagons(animals);
+
+            //check if all animals are added 
+            Assert.IsTrue(wagons.Sum(x => x.AllAnimals.Count) == animalAmount);
+
+            foreach (var wagon in wagons)
+            {
+                var carnivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Carnivores).ToList();
+                var herbivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Herbivores).ToList();
+
+                if (carnivore != null && carnivore.Count > 0)
+                {
+
+                    Assert.IsTrue(carnivore.Count == 1);
+
+                    for (int i = 0; i < carnivore.Count; i++)
+                    {
+                        var herbivoresIsSmaller = herbivore.Any(x => x.Weight < carnivore[i].Weight);
+
+                        // if there is a carnivore in the wagon there can't be a smaller herbivore
+                        Assert.IsTrue(herbivoresIsSmaller == false);
+                    }
+
+                }
+
+
+            }
+        }
+
         [TestMethod]
         public void WagonFactory_2Herbivore1Carnivore()
         {
@@ -29,7 +244,30 @@ namespace UnitTesting.UnitTests
             var wagons = WagonFactory.GenerateFilledWagons(animals);
             //Assert
             Assert.IsTrue(wagons.Count == 2);
-            Assert.IsTrue(wagons[1].AllAnimals[0].AnimalDiet == AnimalDiet.Carnivores);
+
+            foreach (var wagon in wagons)
+            {
+                var carnivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Carnivores).ToList();
+                var herbivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Herbivores).ToList();
+
+                if (carnivore != null && carnivore.Count > 0)
+                {
+
+
+                    Assert.IsTrue(carnivore.Count == 1);
+
+                    for (int i = 0; i < carnivore.Count; i++)
+                    {
+                        var herbivoresIsSmaller = herbivore.Any(x => x.Weight < carnivore[i].Weight);
+
+                        // if there is a carnivore in the wagon there can't be a smaller herbivore
+                        Assert.IsTrue(herbivoresIsSmaller == false);
+                    }
+
+                }
+
+
+            }
         }
 
         [TestMethod]
@@ -37,9 +275,9 @@ namespace UnitTesting.UnitTests
         {
             //Assign
             List<Animal> animals = new List<Animal>();
-            Bird bird_1 = new Bird("test", 2f, AnimalDiet.Ominvores);
-            Bird bird_2 = new Bird("test", 3f, AnimalDiet.Ominvores);
-            Amphibian Amphibian_1 = new Amphibian("test", 2.5f, AnimalDiet.Carnivores);
+            Bird bird_1 = new Bird("bird_1", 2f, AnimalDiet.Ominvores);
+            Bird bird_2 = new Bird("bird_2", 3f, AnimalDiet.Ominvores);
+            Amphibian Amphibian_1 = new Amphibian("Amphibian_1", 2.5f, AnimalDiet.Carnivores);
 
             //Act
 
@@ -50,7 +288,30 @@ namespace UnitTesting.UnitTests
             var wagons = WagonFactory.GenerateFilledWagons(animals);
             //Assert
             Assert.IsTrue(wagons.Count == 2);
-            Assert.IsTrue(wagons[1].AllAnimals[0].AnimalDiet == AnimalDiet.Carnivores);
+
+            foreach (var wagon in wagons)
+            {
+                var carnivore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Carnivores).ToList();
+                var ominvore = wagon.AllAnimals.Where(x => x.AnimalDiet == AnimalDiet.Ominvores).ToList();
+
+                if (carnivore != null && carnivore.Count > 0)
+                {
+
+
+                    Assert.IsTrue(carnivore.Count == 1);
+
+                    for (int i = 0; i < carnivore.Count; i++)
+                    {
+                        var ominvoresIsSmaller = ominvore.Any(x => x.Weight < carnivore[i].Weight);
+
+                        // if there is a carnivore in the wagon there can't be a smaller ominvore
+                        Assert.IsTrue(ominvoresIsSmaller == false);
+                    }
+
+                }
+
+
+            }
         }
 
         [TestMethod]
