@@ -2,6 +2,7 @@ language: csharp
 solution: Circustrain.sln
 dotnet: 4.1.6
 
+
 install:
   - nuget restore Circustrain.sln
   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
