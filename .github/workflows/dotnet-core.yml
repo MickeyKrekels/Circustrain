@@ -12,6 +12,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -19,6 +20,17 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
+      
+    - name: Install NuGet client
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: restore package
+      run: |
+        nuget sources add -name "private-packages" -Source https://nuget.pkg.github.com/yanjingzhu/index.json -StorePasswordInClearText -Username yanjingzhu -Password ${env:Password}
+        dotnet restore ConsoleApp1
+      working-directory: ConsoleApp1
+      env:
+        Password: ${{ secrets.PackagePAT }}
+      
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
